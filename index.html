@@ -40,7 +40,8 @@
         .slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ensures all images fully fill the frame */
+            object-fit: contain; /* FIX: No Cropping, Full Image Visible */
+            background-color: white; /* Avoids black borders */
         }
         .buttons {
             position: absolute;
