@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,23 +10,17 @@
             padding: 0;
             box-sizing: border-box;
         }
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
         .slider-container {
-            width: 90%;
-            max-width: 700px;
-            height: 700px;
+            width: 500px;
+            height: 500px;
             overflow: hidden;
             position: relative;
+            margin: auto;
         }
         .slider {
             display: flex;
+            width: 100%;
+            height: 100%;
             transition: transform 0.5s ease-in-out;
         }
         .slide {
@@ -40,8 +34,7 @@
         .slide img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* FIX: No Cropping, Full Image Visible */
-            background-color: white; /* Avoids black borders */
+            object-fit: contain; /* Ensures the whole image fits without cropping */
         }
         .buttons {
             position: absolute;
@@ -57,24 +50,21 @@
             border: none;
             padding: 10px;
             cursor: pointer;
-            font-size: 20px;
         }
         .back-button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #007bff;
+            display: block;
+            width: 100px;
+            text-align: center;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #000;
             color: white;
             text-decoration: none;
             border-radius: 5px;
         }
-        .back-button:hover {
-            background-color: #0056b3;
-        }
     </style>
 </head>
 <body>
-
     <div class="slider-container">
         <div class="slider">
             <div class="slide"><img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-09-at-10.38.30-682x1024.jpeg" alt="Image 1"></div>
@@ -112,6 +102,5 @@
             showSlide(index);
         }
     </script>
-
 </body>
 </html>
