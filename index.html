@@ -10,12 +10,19 @@
             padding: 0;
             box-sizing: border-box;
         }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
         .slider-container {
             width: 700px;
             height: 700px;
             overflow: hidden;
             position: relative;
-            margin: auto;
+            border: 2px solid black;
         }
         .slider {
             display: flex;
@@ -32,9 +39,9 @@
             height: 100%;
         }
         .slide img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain; /* Ensures the whole image fits without cropping */
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ensures images fit without being cut off */
         }
         .buttons {
             position: absolute;
@@ -50,15 +57,21 @@
             border: none;
             padding: 10px;
             cursor: pointer;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
     <div class="slider-container">
         <div class="slider">
-            <div class="slide"><img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-09-at-10.38.17-682x1024.jpeg" alt="Image 1"></div>
-            <div class="slide"><img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-09-at-10.38.30-682x1024.jpeg" alt="Image 2"></div>
-            <div class="slide"><img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-1024x682.jpeg" alt="Image 3"></div>
+            <div class="slide"><img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-09-at-10.38.30-682x1024.jpeg" alt="Image 1"></div>
+            <div class="slide"><img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-09-at-10.38.17-682x1024.jpeg" alt="Image 2"></div>
+            <div class="slide"><img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.28-1024x682.jpeg" alt="Image 3"></div>
+            <div class="slide"><img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-1-811x1024.jpeg" alt="Image 4"></div>
+            <div class="slide"><img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-2-1024x576.jpeg" alt="Image 5"></div>
+            <div class="slide"><img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-3-864x1024.jpeg" alt="Image 6"></div>
+            <div class="slide"><img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-4-724x1024.jpeg" alt="Image 7"></div>
+            <div class="slide"><img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-5-213x300.jpeg" alt="Image 8"></div>
         </div>
         <div class="buttons">
             <button onclick="prevSlide()">&#10094;</button>
@@ -68,21 +81,23 @@
 
     <script>
         let index = 0;
-        function showSlide(i) {
-            const slider = document.querySelector(".slider");
-            const slides = document.querySelectorAll(".slide");
-            if (i >= slides.length) index = 0;
-            if (i < 0) index = slides.length - 1;
+        const slides = document.querySelectorAll(".slide");
+        const slider = document.querySelector(".slider");
+
+        function showSlide() {
             slider.style.transform = `translateX(-${index * 100}%)`;
         }
+
         function nextSlide() {
-            index++;
-            showSlide(index);
+            index = (index + 1) % slides.length; // Loops back to first slide
+            showSlide();
         }
+
         function prevSlide() {
-            index--;
-            showSlide(index);
+            index = (index - 1 + slides.length) % slides.length; // Loops back to last slide
+            showSlide();
         }
     </script>
 </body>
 </html>
+
