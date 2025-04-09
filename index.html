@@ -4,33 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Slider</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f8f8;
+            margin: 0;
+        }
+        .slider-container {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            overflow: hidden;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slides img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+    </style>
 </head>
 <body>
-    <div id="slider-container">
-        <img id="slider" src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-5-213x300.jpeg" alt="Slider Image">
+    <div class="slider-container">
+        <div class="slides">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-5-213x300.jpeg" alt="Slide 1">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-4-724x1024.jpeg" alt="Slide 2">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-3-864x1024.jpeg" alt="Slide 3">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-2-1024x576.jpeg" alt="Slide 4">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-1-811x1024.jpeg" alt="Slide 5">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-09-at-10.38.17-682x1024.jpeg" alt="Slide 6">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-09-at-10.38.30-682x1024.jpeg" alt="Slide 7">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.28-1024x682.jpeg" alt="Slide 8">
+        </div>
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
     </div>
-
     <script>
-        const images = [
-            "https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-5-213x300.jpeg",
-            "https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-4-724x1024.jpeg",
-            "https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-3-864x1024.jpeg",
-            "https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-2-1024x576.jpeg",
-            "https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-1-811x1024.jpeg",
-            "https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-1024x682.jpeg",
-            "https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.28-1-1024x682.jpeg",
-            "https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.28-1024x682.jpeg"
-        ];
+        let index = 0;
+        const slides = document.querySelector(".slides");
+        const totalSlides = document.querySelectorAll(".slides img").length;
 
-        let currentIndex = 0;
-        const slider = document.getElementById("slider");
-        
-        function showNextImage() {
-            currentIndex = (currentIndex + 1) % images.length;
-            slider.src = images[currentIndex];
+        function showSlide() {
+            slides.style.transform = `translateX(-${index * 100}%)`;
         }
 
-        setInterval(showNextImage, 3000); // Change image every 3 seconds
+        function nextSlide() {
+            index = (index + 1) % totalSlides;
+            showSlide();
+        }
+
+        function prevSlide() {
+            index = (index - 1 + totalSlides) % totalSlides;
+            showSlide();
+        }
     </script>
 </body>
 </html>
