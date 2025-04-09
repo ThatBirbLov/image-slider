@@ -5,75 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Slider</title>
     <style>
-        body {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .slider-container {
+            width: 700px;
+            height: 700px;
+            overflow: hidden;
+            position: relative;
+            margin: auto;
+        }
+        .slider {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            flex: 0 0 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #f8f8f8;
-            margin: 0;
-        }
-        .slider-container {
-            position: relative;
-            width: 80%;
-            max-width: 800px;
-            overflow: hidden;
-        }
-        .slides {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-        .slides img {
             width: 100%;
-            height: auto;
-            object-fit: cover;
+            height: 100%;
         }
-        .prev, .next {
+        .slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Ensures the whole image fits without cropping */
+        }
+        .buttons {
             position: absolute;
             top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
             transform: translateY(-50%);
+        }
+        .buttons button {
             background-color: rgba(0, 0, 0, 0.5);
             color: white;
             border: none;
             padding: 10px;
             cursor: pointer;
         }
-        .prev { left: 10px; }
-        .next { right: 10px; }
     </style>
 </head>
 <body>
     <div class="slider-container">
-        <div class="slides">
-            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-5-213x300.jpeg" alt="Slide 1">
-            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-4-724x1024.jpeg" alt="Slide 2">
-            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-3-864x1024.jpeg" alt="Slide 3">
-            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-2-1024x576.jpeg" alt="Slide 4">
-            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-1-811x1024.jpeg" alt="Slide 5">
-            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-09-at-10.38.17-682x1024.jpeg" alt="Slide 6">
-            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-09-at-10.38.30-682x1024.jpeg" alt="Slide 7">
-            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.28-1024x682.jpeg" alt="Slide 8">
+        <div class="slider">
+            <div class="slide"><img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-09-at-10.38.17-682x1024.jpeg" alt="Image 1"></div>
+            <div class="slide"><img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-09-at-10.38.30-682x1024.jpeg" alt="Image 2"></div>
+            <div class="slide"><img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-1024x682.jpeg" alt="Image 3"></div>
         </div>
-        <button class="prev" onclick="prevSlide()">&#10094;</button>
-        <button class="next" onclick="nextSlide()">&#10095;</button>
+        <div class="buttons">
+            <button onclick="prevSlide()">&#10094;</button>
+            <button onclick="nextSlide()">&#10095;</button>
+        </div>
     </div>
+
     <script>
         let index = 0;
-        const slides = document.querySelector(".slides");
-        const totalSlides = document.querySelectorAll(".slides img").length;
-
-        function showSlide() {
-            slides.style.transform = `translateX(-${index * 100}%)`;
+        function showSlide(i) {
+            const slider = document.querySelector(".slider");
+            const slides = document.querySelectorAll(".slide");
+            if (i >= slides.length) index = 0;
+            if (i < 0) index = slides.length - 1;
+            slider.style.transform = `translateX(-${index * 100}%)`;
         }
-
         function nextSlide() {
-            index = (index + 1) % totalSlides;
-            showSlide();
+            index++;
+            showSlide(index);
         }
-
         function prevSlide() {
-            index = (index - 1 + totalSlides) % totalSlides;
-            showSlide();
+            index--;
+            showSlide(index);
         }
     </script>
 </body>
