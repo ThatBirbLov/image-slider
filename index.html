@@ -4,21 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Slider</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            overflow: hidden;
+            margin: 0;
+        }
+        .slider {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            height: auto;
+            overflow: hidden;
+        }
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 900%;
+        }
+        .slides img {
+            width: 100%;
+            flex-shrink: 0;
+        }
+    </style>
 </head>
 <body>
-    <div style="overflow-x: auto; white-space: nowrap; width: 100vw;">
-        <a href="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-5-213x300.jpeg" target="_blank">
-            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-5-213x300.jpeg" style="height: 300px; margin-right: 10px;"/>
-        </a>
-        <a href="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-4-724x1024.jpeg" target="_blank">
-            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-4-724x1024.jpeg" style="height: 300px; margin-right: 10px;"/>
-        </a>
-        <a href="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-3-864x1024.jpeg" target="_blank">
-            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-3-864x1024.jpeg" style="height: 300px; margin-right: 10px;"/>
-        </a>
-        <a href="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-2-1024x576.jpeg" target="_blank">
-            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-2-1024x576.jpeg" style="height: 300px; margin-right: 10px;"/>
-        </a>
+    <div class="slider">
+        <div class="slides">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-5-213x300.jpeg" alt="">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-4-724x1024.jpeg" alt="">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-3-864x1024.jpeg" alt="">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-2-1024x576.jpeg" alt="">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-1-811x1024.jpeg" alt="">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.29-1024x682.jpeg" alt="">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.28-1-1024x682.jpeg" alt="">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.28-1024x682.jpeg" alt="">
+            <img src="https://d.th-nuernberg.de/intern/wp-content/uploads/2025/04/WhatsApp-Image-2025-04-07-at-20.26.28-1024x682.jpeg" alt="">
+        </div>
     </div>
+    <script>
+        let index = 0;
+        function showNextSlide() {
+            const slides = document.querySelector('.slides');
+            index = (index + 1) % slides.children.length;
+            slides.style.transform = `translateX(-${index * 100}%)`;
+        }
+        setInterval(showNextSlide, 3000);
+    </script>
 </body>
 </html>
